@@ -55,4 +55,5 @@
     </ItemGroup>
   </Target>
 
+  <ProjectExtensions><VisualStudio><UserProperties ClientApp_4package-lock_1json__JSONSchema="http://json.schemastore.org/apple-app-site-association" /></VisualStudio></ProjectExtensions>
 </Project>
