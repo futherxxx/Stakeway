@@ -19,6 +19,9 @@ namespace Stakeway
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseSetting("detailedErrors", "true")
+                .CaptureStartupErrors(true)
                 .UseStartup<Startup>();
     }
 }
