@@ -34,8 +34,59 @@
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Compile Remove="ClientApp\src\app\admin\**" />
+    <Compile Remove="ClientApp\src\app\callback\**" />
+    <Compile Remove="ClientApp\src\app\games\**" />
+    <Compile Remove="ClientApp\src\app\golden\**" />
+    <Compile Remove="ClientApp\src\app\home\**" />
+    <Compile Remove="ClientApp\src\app\navmenu\**" />
+    <Compile Remove="ClientApp\src\app\pipes\**" />
+    <Compile Remove="ClientApp\src\app\premier\**" />
+    <Compile Remove="ClientApp\src\app\profile\**" />
+    <Compile Remove="ClientApp\src\app\result\**" />
+    <Compile Remove="ClientApp\src\app\rnds\**" />
+    <Compile Remove="ClientApp\src\app\winlot\**" />
     <Content Remove="$(SpaRoot)**" />
+    <Content Remove="ClientApp\src\app\admin\**" />
+    <Content Remove="ClientApp\src\app\callback\**" />
+    <Content Remove="ClientApp\src\app\games\**" />
+    <Content Remove="ClientApp\src\app\golden\**" />
+    <Content Remove="ClientApp\src\app\home\**" />
+    <Content Remove="ClientApp\src\app\navmenu\**" />
+    <Content Remove="ClientApp\src\app\pipes\**" />
+    <Content Remove="ClientApp\src\app\premier\**" />
+    <Content Remove="ClientApp\src\app\profile\**" />
+    <Content Remove="ClientApp\src\app\result\**" />
+    <Content Remove="ClientApp\src\app\rnds\**" />
+    <Content Remove="ClientApp\src\app\winlot\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="ClientApp\src\app\admin\**" />
+    <EmbeddedResource Remove="ClientApp\src\app\callback\**" />
+    <EmbeddedResource Remove="ClientApp\src\app\games\**" />
+    <EmbeddedResource Remove="ClientApp\src\app\golden\**" />
+    <EmbeddedResource Remove="ClientApp\src\app\home\**" />
+    <EmbeddedResource Remove="ClientApp\src\app\navmenu\**" />
+    <EmbeddedResource Remove="ClientApp\src\app\pipes\**" />
+    <EmbeddedResource Remove="ClientApp\src\app\premier\**" />
+    <EmbeddedResource Remove="ClientApp\src\app\profile\**" />
+    <EmbeddedResource Remove="ClientApp\src\app\result\**" />
+    <EmbeddedResource Remove="ClientApp\src\app\rnds\**" />
+    <EmbeddedResource Remove="ClientApp\src\app\winlot\**" />
+    <None Remove="ClientApp\src\app\admin\**" />
+    <None Remove="ClientApp\src\app\callback\**" />
+    <None Remove="ClientApp\src\app\games\**" />
+    <None Remove="ClientApp\src\app\golden\**" />
+    <None Remove="ClientApp\src\app\home\**" />
+    <None Remove="ClientApp\src\app\navmenu\**" />
+    <None Remove="ClientApp\src\app\pipes\**" />
+    <None Remove="ClientApp\src\app\premier\**" />
+    <None Remove="ClientApp\src\app\profile\**" />
+    <None Remove="ClientApp\src\app\result\**" />
+    <None Remove="ClientApp\src\app\rnds\**" />
+    <None Remove="ClientApp\src\app\winlot\**" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
