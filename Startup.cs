@@ -1,8 +1,12 @@
+using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using stakeway.Api.Persistences;
 
 namespace Stakeway
 {
@@ -18,7 +22,20 @@ namespace Stakeway
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper();
+            services.AddDbContext<StakewayDbContext>(options => options.UseSqlServer("Server=cdd32f7a-efcb-46a1-9342-a8f40051055c.sqlserver.sequelizer.com;Database=dbcdd32f7aefcb46a19342a8f40051055c;User ID=myuyazkipollhdey;Password=cqahVm2yAbhmSmt7iGCzqhiLoue36XJJMH2wSYFrfyEaWnHypCtRMTQ3hv3zh8BL;"));
             services.AddMvc();
+            // 1. Add Authentication Services
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+            }).AddJwtBearer(options =>
+            {
+                options.Authority = "https://stakeway.auth0.com/";
+                options.Audience = "http://stakeway.apphb.com/";
+            });
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -41,7 +58,17 @@ namespace Stakeway
 
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
+            app.UseAuthentication();
+            app.UseCors(options =>
+            {
+                options.WithOrigins("http://localhost:4200")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
 
+                options.WithOrigins("http://stakeway.apphb.com")
+                   .AllowAnyHeader()
+                   .AllowAnyMethod();
+            });
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
