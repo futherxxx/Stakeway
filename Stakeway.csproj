@@ -12,8 +12,18 @@
     <!-- Set this to true if you enable server-side prerendering -->
     <BuildServerSideRenderer>false</BuildServerSideRenderer>
   </PropertyGroup>
-
   <ItemGroup>
+    <Compile Remove="Migrations\20180724222314_GamesMigration.cs" />
+    <Compile Remove="Migrations\20180724222314_GamesMigration.Designer.cs" />
+    <Compile Remove="Migrations\20180724223142_GamesMigration.cs" />
+    <Compile Remove="Migrations\20180724223142_GamesMigration.Designer.cs" />
+    <Compile Remove="Migrations\20180725003411_GamesMigration.cs" />
+    <Compile Remove="Migrations\20180725003411_GamesMigration.Designer.cs" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="automapper" Version="7.0.1" />
+    <PackageReference Include="automapper.extensions.microsoft.dependencyinjection" Version="5.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="2.0.0" />
   </ItemGroup>
