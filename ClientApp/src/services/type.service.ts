@@ -7,7 +7,7 @@ import { GameTypes } from '../models/game.model';
 export class TypeService {
     
     constructor(private http:Http) { }
-    baseurl:string="http://localhost:54208/api/types";
+  baseurl: string ="http://stakeway.apphb.com/api/types";
 
     getAllTypes(){
         return this.http.get(this.baseurl).map(res => res.json());

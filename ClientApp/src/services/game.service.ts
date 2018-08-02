@@ -22,7 +22,7 @@ import 'rxjs/add/operator/switchMap';
 export class GamesService {
     
     constructor(private http:Http) { }
-    baseUrl:string="http://localhost:54208/api/games";
+  baseUrl: string ="http://stakeway.apphb.com/api/games";
     getGames(){
        return  this.http.get(this.baseUrl).map(res => res.json());
     }

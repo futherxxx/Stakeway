@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 export class UserService {
     
     constructor(private http:Http) { }
-    baseUrl:string="http://localhost:54208/api/users";
+  baseUrl: string ="http://stakeway.apphb.com/api/users";
 
     createUser(user){
         var headers = new Headers({ 'Content-Type': 'application/json' });
