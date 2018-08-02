@@ -18,7 +18,7 @@ export class AuthService {
     domain: 'stakewaytest.auth0.com',
     responseType: 'token id_token',
     audience: 'https://stakewaytest.auth0.com/userinfo',
-    redirectUri: 'http://stakewaytest.apphb.com/callback',
+    redirectUri: 'http://stakeway.apphb.com/callback',
     scope: 'openid user email profile read:messages write:messages'
   });
   user={} as User;
