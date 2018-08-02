@@ -1,0 +1,56 @@
+mat-sidenav {
+  width: 240px;
+}
+
+html, body, material-app, mat-sidenav-container, .my-content {
+  background-color: #F5F5F5;
+  font-family: Roboto,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.75;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  /*background-image: url('../../images/619b1ab7ac25a95f087e3df19637385c.gif');*/
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.fill-space {
+  flex: 1 1 auto;
+}
+
+.logo-wrapper {
+  width: 100px;
+  height: 50px;
+}
+
+.gameOpt li {
+  display: inline-block;
+}
+
+.gameOpt li a {
+  padding: 16px;
+}
+.gameOpt li a.active {
+  background-color:lightblue;
+}
+
+.gameOpt {
+  height: 100%;
+  //padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+
+
+.carousel-item.active, .carousel-item-next, .carousel-item-prev {
+
+    display: flex;
+    
+    overflow: hidden;
+    
+    height: 100vh;
+    
+    }

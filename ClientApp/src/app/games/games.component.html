@@ -1,0 +1,149 @@
+<div style="height: 60px;"></div>
+<div class="uk-container uk-container-center">
+  <h2 class="heading_b uk-margin-bottom uk-text-center" style="background-color: #d7ddff;padding: 15px">
+    <span class="md-color-light-green-500" style="padding: 15px;padding-bottom: 13px;border-bottom: 2px solid #3f51b5;    font-weight: 500">Your Games</span>
+    <span *ngIf="this.auth.isInRole('Admin')">
+    <a (click)="playAsAgent()" style="float:right;" *ngIf="this.player==''">Play As Other Player</a>
+    <a (click)="playAsAgent()" style="float:right;" *ngIf="this.player!=''">Playing as {{player}}</a>
+    </span>
+  </h2>
+  <div class="uk-grid row" style="margin: 0px;">
+    <div class="uk-width-1-6 col-md-3">
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Draws</mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="uk-panel uk-panel-box">
+            <ul class="uk-list uk-list-striped" style="padding-left: 0px;list-style-type: none;margin: 15px;">
+              <ng-container *ngFor="let game of currentGame;let ndx=index" >
+
+                <li class="games-list-item">
+                  <div (click)="SelectGame(ndx,game)" class="game" [ngClass]="game.gameSelected?'activeGame':'passiveGame'">
+                    <h4 class="uk-panel-title">{{game.name}} </h4>
+                    <!--<span style="font-style: italic;"> {{game.endTime | date:'dd/MM/yyyy'}}</span><br/>-->
+                    <span style="font-weight: 500;">Starts:</span><span> {{game.startTime | date:'HH:mm'}}</span> -
+                    <span style="font-weight: 500;">Ends:</span> <span> {{game.endTime | date:'HH:mm'}}</span>
+                    <!--<countdown-timer (zeroTrigger)="GameExpired(game.gameID)" [end]="game.endTime|date:'yyyy-MM-dd HH:mm'"></countdown-timer>-->
+                  </div>
+                </li>
+              </ng-container>
+            </ul>
+          </div>
+        </mat-expansion-panel>       
+      </mat-accordion>
+    </div>
+    <!-- Game Listing Stops-->
+    <!--Game Board Starts-->
+    <div class="uk-width-4-6 col-md-4">
+      <div class="uk-panel uk-panel-box" *ngIf="selectedGame!=null||selectedGame!=undefined">
+        <div class="uk-panel-badge uk-badge">Badge</div>
+        <h3 class="uk-panel-title">{{selectedGame.name}}</h3>        
+        <div>
+          Ends in: {{selectedGame.endTime | date:'HH:mm'}}
+          <countdown-timer (zeroTrigger)="GameExpired(selectedGame.gameID)" [end]="selectedGame.endTime | date:'yyyy-MM-dd HH:mm'"></countdown-timer>
+        </div>
+        <div id="gameselection">
+          <select name="" id="" class="browser-default" [(ngModel)]="gameTypeOpt">
+            <!-- <option *ngFor="let item of gametypes" [value]='item'>{{item}}</option> -->
+            <option value="NAP2">NAP2</option>
+            <option value="PERM2">PERM2</option>
+            <option value="NAP3">NAP3</option>
+            <option value="PERM3">PERM3</option>
+            <option value="NAP4">NAP4</option>
+            <option value="PERM4">PERM4</option>            
+          </select>
+        </div>
+        <div class="lotto_numbers">
+          <div *ngFor="let row of gamenumbers;let i=index" class="uk-flex">
+            <div #ball *ngFor="let col of row" [ngClass]="[btnStyle]" id="ball_{{col}}" (click)="ballclick(col)" appGameballstyle>
+              {{col}}
+            </div>
+          </div>
+        </div>
+        <!--<div>
+          <button>Play</button>
+          <button (click)="ClearBoard()">Clear</button>
+        </div>-->
+      </div>
+    </div>
+    <!-- Game Board Ends-->
+    <div class="col-md-2">
+      <div *ngIf="selectedGame!=null">
+        <button (clear)="clear()">Clear</button>
+        <a class="btn btn-sm btn-info" (click)='addBetToList()'>Add Bet To BetList</a>
+      </div>
+    </div>
+    <!-- Game Selection Starts-->
+    <div class="uk-width-1-6 col-md-3">     
+      <div class="betingList">
+        <div #betList id="betList">
+          <div class="bet-item-container" id="bet-{{i}}" *ngFor="let item of this.betingList; let i=index">
+            <div class="bet-item">
+              <div class="bet-header">
+                <h4 class="bet-heading">{{item.type}} <a style="float:right;" (click)="removeBet(i)">&times;</a> </h4>
+              </div>
+              <div class="bet-body">
+                <div class="lines"> <span>Lines:</span><span>{{item.lines}}</span> </div>
+                <div class="type"><span>Type:</span><span>{{item.type}}</span></div>
+                <div class="numbers"><span>Numbers:</span><span *ngFor="let n of item.numbers">{{n}},</span></div>
+                <div class="stack-input">Enter stack: <input type="text" (change)="addToStack(i,item.stack)" [(ngModel)]="item.stack"></div>
+                <div class="stack-btns">
+                  <button class="btn btn-sm btn-indigo" (click)="addToStack(i,50)">$50</button>
+                  <button class="btn btn-sm btn-indigo" (click)="addToStack(i,100)">$100</button>
+                  <button class="btn btn-sm btn-indigo" (click)="addToStack(i,200)">$200</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bets-detail">
+          <div class="number-of-bets">{{this.betingList.length}}</div>
+          <div class="total-stack">${{sumTotalStack()}}</div>
+          <div class="login-to-bet">
+            <a class="btn btn-sm" *ngIf="!this.auth.isAuthenticated()" (click)="placebet(false)">Login to Bet</a>
+            <a class="btn btn-sm" *ngIf="this.auth.isAuthenticated()" (click)="placebet(true)">Bet</a>
+          </div>
+        </div>
+      </div>
+      <!--<div class="uk-panel uk-panel-box uk-panel-box-primary">
+        Selection: <span class="uk-badge">1</span>
+
+        <div>
+          <span *ngFor="let nos of selectedNumbers">{{nos}} &nbsp;</span>
+          <br/>
+          <strong>Stake Amount</strong> <input #Stakeamount type="text" [(ngModel)]="StakeAmount" placeholder="0.00" class="uk-form-small form-control">
+          <button (click)="ProcessStake()" class="btn btn-default btn-sm">Add</button>
+          <button (click)="ClearBoard()" class="btn btn-default btn-sm">Clear</button>
+        </div>
+
+      </div>
+      <div class="uk-panel uk-panel-box uk-panel-box-primary">
+        Selection: <span class="uk-badge">1</span>
+
+      </div>-->
+    </div>
+    <!-- Game Selection Ends-->
+  </div>
+</div>
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <div class="">
+      <span class="close" (click)="closeModal()" style="z-index:20;">&times;</span>
+    </div>
+    <div class="clearfix"></div>
+    <div class="body">
+      <div class="list-group">
+        <div class="playerQuery">
+          <mat-form-field>
+            <input matInput placeholder="Search by name" [(ngModel)]="playersQuery">
+          </mat-form-field>
+          <!-- <input type="text" [(ngModel)]="playersQuery"> -->
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item" *ngFor="let item of this.listofusers | filter : playersQuery"><a (click)="addPlayer(item.username)" [title]="item.username">{{item.name}}</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

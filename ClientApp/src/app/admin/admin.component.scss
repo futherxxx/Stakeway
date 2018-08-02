@@ -1,0 +1,17 @@
+.padding-t15{
+  padding-top:15px;
+}
+.padding-b15 {
+  padding-top: 15px;
+}
+.thead-inverse th {
+  background-color: #59698d !important;
+}
+.example-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.example-container > * {
+  width: 100%;
+}

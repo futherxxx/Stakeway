@@ -1,10 +1,114 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2 style="text-align:center">Currently Working on Updates </h2>
 
 
+<mat-sidenav-container material-app fullscreen>
+    <mat-sidenav #sidenav>
+        <app-navmenu></app-navmenu>
+    </mat-sidenav>
+    <div mat-content class="my-content">
+        <nav class="navbar navbar-expand-lg navbar-dark scrolling-navbar fixed-top top-nav-collapse" [ngClass]="{'navbar-dark primary-color':homeActive}">
+            <button class="navbar-brand text-white" mat-icon-button (click)="sidenav.toggle()">
+                <mat-icon *ngIf="sidenav.opened">format_indent_decrease</mat-icon>
+                <mat-icon *ngIf="!sidenav.opened">format_indent_increase</mat-icon>
+            </button>
+
+
+            <!-- Navbar brand -->
+            <a class="navbar-brand text-white" [routerLink]="['./home']">
+                <span class="logo-wrapper waves-light">
+                    <a>
+                        <img alt="angular" class="docs-angular-logo logo-wrapper" src="../../assets/images/Stakeway-logo.3844e693d07120bcce8a.png">
+                    </a>
+                </span>
+            </a>
+
+            <!-- Collapse button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Collapsible content -->
+            <div class="collapse navbar-collapse" id="basicExampleNav">
+
+                <!-- Links -->
+                <ul class="navbar-nav mr-auto">
+                    <li>
+                        <a class="btn btn-info btn-rounded btn-sm waves-effect waves-light" [routerLink]="['./premier']">Premier Lotto
+
+                        </a>
+                    </li>
+                    <li>
+                        <a class="btn btn-info btn-rounded btn-sm waves-effect waves-light" [routerLink]="['./winlot']">Winlot Lotto
+
+                        </a>
+                    </li>                    
+                    <li>
+                        <a class="btn btn-info btn-rounded btn-sm waves-effect waves-light" [routerLink]="['./golden']">Golden Chance Lotto
+
+                        </a>
+                    </li>
+                    <li>
+                        <a class="btn btn-info btn-rounded btn-sm waves-effect waves-light" [routerLink]="['./rnds']">R&S Lotto
+
+                        </a>
+                    </li>
+
+                </ul>
+                <ul class="nav navbar-nav nav-flex-icons ml-auto">
+
+
+                    <li class="nav-item">
+                        <a [routerLink]="['./contact']" class="nav-link waves-effect text-white">
+                            <i class="fa fa-envelope"></i>
+                        </a>
+                    </li>
+                    <!-- Login / register -->
+                    <li *ngIf="!auth.isAuthenticated()">
+                        <a class="btn btn-info btn-rounded btn-sm waves-effect waves-light" (click)="auth.login()">Log In
+                            <i class="fa fa-sign-in ml-2"></i>
+                        </a>
+                    </li>
+                    <!-- <li class="nav-item dropdown show" *ngIf="auth.isAuthenticated()">
+                        <a class="nav-link dropdown-toggle waves-effect" id="navbar-account" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <img src="{{profile?.picture}}" class="avatar avatar-wordpress-social-login avatar-24 photo" height="24" width="24"> </a>
+                        <div class="dropdown-menu dropdown-menu-right dropdown-info show" aria-labelledby="userDropdown" data-dropdown-in="fadeIn"
+                            data-dropdown-out="fadeOut">
+                            <a id="navbar-static-profile" class="dropdown-item waves-effect waves-light" href="/profile/?id=41376">My profile</a>
+                            <a id="navbar-static-settings" class="dropdown-item waves-effect waves-light" href="/profile/?id=41376">Settings</a>
+                            <a id="navbar-static-affiliate" class="dropdown-item waves-effect waves-light" href="/profile/?id=41376">Affiliate account</a>
+                            <a id="navbar-static-orders" class="dropdown-item waves-effect waves-light" href="/profile/?id=41376">Orders</a>
+                            <a id="navbar-static-logout" class="dropdown-item waves-effect waves-light" href="https://mdbootstrap.com/wp-login.php?action=logout&amp;redirect_to=https%3A%2F%2Fmdbootstrap.com&amp;_wpnonce=9911d11b67">Log Out</a>
+                        </div>
+                    </li> -->
+
+
+                    <!-- <li class="nav-item avatar dropdown" *ngIf="auth.isAuthenticated()">
+                      <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink-5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                          <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" class="rounded-circle z-depth-0" alt="avatar image">
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-right dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-5">
+                          <a class="dropdown-item waves-effect waves-light" href="#">Action</a>
+                          <a class="dropdown-item waves-effect waves-light" href="#">Another action</a>
+                          <a class="dropdown-item waves-effect waves-light" href="#">Something else here</a>
+                      </div>
+                  </li> -->
+                </ul>
+                <!-- <a id="navbar-static-login" class="btn btn-info btn-rounded btn-sm waves-effect waves-light" data-toggle="modal" data-target="#navbarLogin">Log In
+                  <i class="fa fa-sign-in ml-2"></i>
+                </a> -->
+                <!-- Links -->
+
+                <!-- <form class="form-inline">
+                  <div class="md-form my-0">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                  </div>
+                </form> -->
+            </div>
+            <!-- Collapsible content -->
+
+        </nav>
+        <div [@routerTransition]="getState(myOutlet)" class="routeContainer">
+            <router-outlet #myOutlet="outlet"></router-outlet>
+        </div>
+    </div>
+</mat-sidenav-container>

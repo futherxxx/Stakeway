@@ -1,0 +1,173 @@
+<div style="height: 60px;"></div>
+<div>
+  <a class="btn btn-default btn-rounded mb-6" data-toggle="modal" (click)="openModal();getAllTypes()" data-target="#fullHeightModalRight">Add Game</a>
+  <a class="btn btn-default btn-rounded mb-6" data-toggle="modal" (click)="openTypeModal()" data-target="#addTypeModal">Add Type</a>
+
+</div>
+<div>
+</div>
+<div class="modal fade in show right" id="fullHeightModalRight" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+
+  <!-- Add class .modal-full-height and then add class .modal-right (or other classes from list above) to set a position to the modal -->
+  <div class="modal-dialog modal-full-height modal-right " role="document">
+
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-300" id="myModalLabel">Add Game</h4>
+        <button type="button" class="close" (click)="closeModal()" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="example-container">
+          <mat-form-field>
+            <input matInput placeholder="Game Name" [(ngModel)]="game.name" name="name">
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-select placeholder="Select Game Organization" [(value)]="game.gameOrganization">
+              <mat-option value="">Select  game organization</mat-option>
+              <mat-option value="Premier Lotto">Premier Lotto</mat-option>
+              <mat-option value="Winlot Lotto">Winlot Lotto</mat-option>
+              <mat-option value="Golden Chance Lotto">Golden Chance Lotto</mat-option>
+              <mat-option value="R&S Lotto">R & S Lotto</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <!-- <mat-form-field floatPlaceholder="never" shouldPlaceholderFloat="false"  >
+              <mat-select placeholder="Game Types" [(ngModel)]="selectedValue" [formControl]="selectedType" multiple ngControl="selectedType"  (focusout)="onOut()">
+                <mat-option *ngFor="let type of types" [value]="type">{{type}}</mat-option>
+              </mat-select>
+            </mat-form-field> -->
+            <mat-form-field style="width: 100%">
+                <mat-select placeholder="Game Types" [(ngModel)]="temps" (focusout)="onOut()" multiple>
+                  <mat-option *ngFor="let type of gameTypes" [value]="type.name" (click)="addToGameTypes(type.name)">{{type.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              
+          <mat-form-field>
+            <input matInput type="datetime-local" [matDatepicker]="picker" placeholder="Start Time" [(ngModel)]="game.startTime">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput type="datetime-local" [matDatepicker]="picker" placeholder="End Time" [(ngModel)]="game.endTime">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="Min Bet" [(ngModel)]="game.min" name="min">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="Max Bet" [(ngModel)]="game.max" name="max">
+          </mat-form-field> 
+        </div>
+
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-secondary" (click)="closeModal()" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="addGame();closeModal()">Add Game</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Full Height Modal Right -->
+<div class="modal fade in show right" id="addTypeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+
+  <!-- Add class .modal-full-height and then add class .modal-right (or other classes from list above) to set a position to the modal -->
+  <div class="modal-dialog modal-full-height modal-right " role="document">
+
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-300" id="myModalLabel">Add Type</h4>
+        <button type="button" class="close" (click)="closeTypeModal()" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="example-container">
+          <mat-form-field>
+            <input matInput placeholder="Game Name" [(ngModel)]="type.name" name="name">
+          </mat-form-field>
+
+        
+
+        </div>
+
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-secondary" (click)="closeModal()" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="addType();closeTypeModal()">Add Type</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Full Height Modal Right -->
+
+<!-- Modal -->
+<div class="modal fade in show" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete Game</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeDeletePopup()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure want to delete this Game ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeDeletePopup()">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="deleteGame()">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+<table class="table table-hover">
+  <thead class="thead-inverse text-white">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Game Name</th>
+      <th scope="col">Game Type</th>
+      <th scope="col">Created By</th>
+      <th scope="col">Created Date</th>
+      <th scope="col">Modified By</th>
+      <th scope="col">Modified Date</th>
+      <th scope="col">Game Min</th>
+      <th scope="col">Game Max</th>
+      <th scope="col">Start Time</th>
+      <th scope="col">End Time</th>
+      <th></th>
+
+    </tr>
+  </thead>
+  <tbody style="width: 100%">
+    <tr *ngFor="let game of games; let i =index">
+      <th scope="row">{{i+1}}</th>
+      <td (click)="openSelectedModal(game)">{{game.name}}</td>
+      <td (click)="openSelectedModal(game)">{{game.gameType}}</td>
+      <td (click)="openSelectedModal(game)">{{game.createdBy}}</td>
+      <td (click)="openSelectedModal(game)">{{game.createdDate}}</td>
+      <td (click)="openSelectedModal(game)">{{game.modifiedBy}}</td>
+      <td (click)="openSelectedModal(game)">{{game.modifiedDate}}</td>
+      <td (click)="openSelectedModal(game)">{{game.min}}</td>
+      <td (click)="openSelectedModal(game)">{{game.max}}</td>
+      <td (click)="openSelectedModal(game)">{{game.startTime}}</td>
+      <td (click)="openSelectedModal(game)">{{game.endTime}}</td>
+      <td (click)="deleteGamePopup(game)">
+        <a ><i class="fa fa-close" aria-hidden="true"></i></a>
+      </td>
+    </tr>
+    <tr *ngIf="games && games.length ==0 || games == undefined || games==null" align="center" style="text-align: center">      
+       <td colspan="12" class="text-danger">
+          No Record Found
+       </td> 
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,73 @@
+
+  <!--Carousel Wrapper-->
+  <mdb-carousel class="carousel slide" [animation]="'slide'">
+    <!--First slide-->
+    <mdb-slide>
+        <!--Mask color-->
+        <div class="view hm-indigo-light">
+            <!--Video source-->
+            <video class="video-fluid" autoplay loop>
+                <source src="https://mdbootstrap.com/img/video/city.mp4" type="video/mp4">
+            </video>
+            <div class="mask rgba-black-light"></div>
+            <div class="full-bg-img flex-center mask rgba-indigo-light white-text">
+                <ul class="animated fadeInUp col-md-12 list-unstyled list-inline">
+                    <li>
+                        <h1 class="font-weight-bold text-uppercase">We play, You win</h1>
+                    </li>
+                    <li>
+                        <!-- <p class="font-weight-bold text-uppercase py-4">And Some Sub Text Related ...</p> -->
+                    </li>
+                    <li class="list-inline-item" *ngIf="!auth.isAuthenticated()">
+                        <a (click)="auth.login()"  class="btn btn-unique btn-lg btn-rounded mr-0 waves-effect waves-light">Sign up!</a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a [routerLink]="['./../campaign']" class="btn btn-cyan btn-lg btn-rounded ml-0 waves-effect waves-light">Lean More</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!--Caption-->
+        <!--Caption-->
+    </mdb-slide>
+    <!--/First slide-->
+    <!--Second slide-->
+    <mdb-slide>
+        <!--Mask color-->
+        <div class="view hm-purple-slight">
+            <!--Video source-->
+            <video class="video-fluid" autoplay loop>
+                <source src="https://mdbootstrap.com/img/video/forest.mp4" type="video/mp4">
+            </video>
+            <div class="full-bg-img flex-center mask rgba-indigo-light white-text">
+                <ul class="animated fadeInDown col-md-12 list-unstyled list-inline">
+                    <li>
+                        <h1 class="display-4 font-bold">Create an Event</h1>
+                    </li>
+                    <li>
+                        <h5>And all of them are FREE!</h5>
+                    </li>
+                    <li>
+                        <a target="_blank" [routerLink]="['./campaign']" class="btn btn-primary waves-effect waves-light" rel="nofollow">Start learning</a>
+                    </li>
+                </ul>
+            </div>
+
+
+            <div class="mask waves-light" mdbRippleRadius></div>
+        </div>
+
+        <!--Caption-->
+        <!-- <div class="carousel-caption">
+            <div class="animated fadeInDown">
+                <h3 class="h3-responsive">Super light mask</h3>
+                <p>Secondary text</p>
+            </div>
+        </div> -->
+        <!--Caption-->
+    </mdb-slide>
+    <!--/Second slide-->
+</mdb-carousel>
+<!--Carousel Wrapper-->
