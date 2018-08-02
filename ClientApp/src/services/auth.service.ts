@@ -14,11 +14,11 @@ export class AuthService {
   static roles: any[] = [];
   static loggedIn:boolean=false;
   auth0 = new auth0.WebAuth({
-    clientID: 'utoF7mgF9tT9lO04MCkezoKt47kezHqQ',
-    domain: 'stakeway.auth0.com',
+    clientID: 'pDj8vax3iNEwCKZu6vQefFEMO0ztKkYP',
+    domain: 'stakewaytest.auth0.com',
     responseType: 'token id_token',
-    audience: 'https://stakeway.auth0.com/userinfo',
-    redirectUri: 'http://stakeway.apphb.com/callback',
+    audience: 'https://stakewaytest.auth0.com/userinfo',
+    redirectUri: 'http://stakewaytest.apphb.com/callback',
     scope: 'openid user email profile read:messages write:messages'
   });
   user={} as User;
